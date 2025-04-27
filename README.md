@@ -18,10 +18,6 @@ An ASP.NET Core MVC web application for managing an online shopping cart, applyi
 ## 🚀 How to Run
 
 1. **Clone the repository**
-    ```bash
-    git clone https://github.com/your-username/online-shopping-app.git
-    cd online-shopping-app
-    ```
 
 2. **Configure the database**
     - Update `appsettings.json` with your database connection string.
