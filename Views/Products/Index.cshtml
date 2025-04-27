@@ -1,0 +1,45 @@
+﻿@model IEnumerable<OnlineShoppingApp.Models.Product>
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h2>Products</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th>Final Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price.ToString("C")</td>
+                <td>@product.Discount.ToString("C")</td>
+                @{
+                    var finalPrice = (product.Price - product.Discount).ToString("C", new System.Globalization.CultureInfo("en-US"));
+                }
+                <td>@finalPrice</td>
+                <td>
+                    @using (Html.BeginForm("Add", "Cart", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="productId" value="@product.Id" />
+                        <input type="hidden" name="quantity" value="1" />
+                        <button type="submit" class="btn btn-sm btn-primary">Add to Cart</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-success">Create New Product</a>
